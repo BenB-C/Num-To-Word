@@ -3,6 +3,11 @@ require ('num_to_word')
 
 describe ('#num_to_word') do
   it("returns the word for a single digit") do
+    number = NumToWord.new(0)
+    expect(number.to_word).to(eq("zero"))
+  end
+
+  it("returns the word for a single digit") do
     number = NumToWord.new(5)
     expect(number.to_word).to(eq("five"))
   end
@@ -63,7 +68,47 @@ describe ('#num_to_word') do
   end
 
   it("returns the word for a double digit number greater than or equal to twenty") do
-    number = NumToWord.new(84)
-    expect(number.to_word).to eq("eighty four")
+    number = NumToWord.new(99)
+    expect(number.to_word).to eq("ninety nine")
+  end
+
+  it("returns the word for a triple digit number") do
+    number = NumToWord.new(100)
+    expect(number.to_word).to(eq("one hundred"))
+  end
+
+  it("returns the word for a triple digit number") do
+    number = NumToWord.new(109)
+    expect(number.to_word).to(eq("one hundred nine"))
+  end
+
+  it("returns the word for a triple digit number") do
+    number = NumToWord.new(521)
+    expect(number.to_word).to(eq("five hundred twenty one"))
+  end
+
+  it("returns the word for a triple digit number") do
+    number = NumToWord.new(780)
+    expect(number.to_word).to(eq("seven hundred eighty"))
+  end
+
+  it("returns the word for a triple digit number") do
+    number = NumToWord.new(786)
+    expect(number.to_word).to(eq("seven hundred eighty six"))
+  end
+
+  it("returns the word for a triple digit number") do
+    number = NumToWord.new(999)
+    expect(number.to_word).to(eq("nine hundred ninety nine"))
+  end
+
+  it("returns the word for a number up to 999,999") do
+    number = NumToWord.new(123456)
+    expect(number.to_word).to(eq("one hundred twenty three thousand four hundred fifty six"))
+  end
+
+  it("returns the word for a number in the billions") do
+    number = NumToWord.new(555123456789)
+    expect(number.to_word).to(eq("five hundred fifty five billion one hundred twenty three million four hundred fifty six thousand seven hundred eighty nine"))
   end
 end
