@@ -29,35 +29,36 @@ class NumToWord
         number = NumToWord.new(rest_of_number)
         less_than_twenty_array[hundreds_place] + " hundred " + number.to_word
       end
-    elsif (@number < 1000000)
-      thousands_part = @number / 1000
-      rest_of_number = @number % 1000
-      big_number = NumToWord.new(thousands_part)
-      small_number = NumToWord.new(rest_of_number)
-      big_number.to_word + " thousand " + small_number.to_word
+    # elsif (@number < 1000000)
+    #   thousands_part = @number / 1000
+    #   rest_of_number = @number % 1000
+    #   big_number = NumToWord.new(thousands_part)
+    #   small_number = NumToWord.new(rest_of_number)
+    #   big_number.to_word + " thousand " + small_number.to_word
     end
   end
 
   def to_word
     if @number === 0
-      return "zero"
+      "zero"
     elsif @number > 10**(12 * 3)
-      return "I'm not sure but that's at least a bajillion"
-    end
-    comma_names = ["", "thousand", "million", "billion", "trillion", "quadrillion", "quintillion", "sextillion", "septillion", "octillian", "nonilian"]
-    number_part = @number
-    word = ""
-    comma_count = 0
-    while number_part > 0 do
-      rightmost_three_digits = number_part % 1000
-      if comma_count === 0
-        word = NumToWord.new(rightmost_three_digits).to_word_three_digits
-      else
-        word = NumToWord.new(rightmost_three_digits).to_word_three_digits + " " + comma_names[comma_count] + " " + word
+      "I'm not sure but that's at least a bajillion"
+    else
+      comma_names = ["", "thousand", "million", "billion", "trillion", "quadrillion", "quintillion", "sextillion", "septillion", "octillian", "nonilian"]
+      number_part = @number
+      word = ""
+      comma_count = 0
+      while number_part > 0 do
+        rightmost_three_digits = number_part % 1000
+        if comma_count === 0
+          word = NumToWord.new(rightmost_three_digits).to_word_three_digits
+        else
+          word = NumToWord.new(rightmost_three_digits).to_word_three_digits + " " + comma_names[comma_count] + " " + word
+        end
+        comma_count = comma_count + 1
+        number_part = number_part / 1000
       end
-      comma_count = comma_count + 1
-      number_part = number_part / 1000
+      word
     end
-    word
   end
 end
